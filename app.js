@@ -106,7 +106,29 @@ app.post("/login", function(req, res, next){
     res.redirect("/");
 });
 
+//ユーザ登録の処理
+app.post("/register", function(req, res, next){
+    const newusername = req.body.username;
+    const newpassword = req.body.password;
+    const hashednewpassword = crypto.createHash("md5").update(newpassword).digest("hex");
+    if(users[`${newusername}`]){
+        return res.render("register", {
+            error: true,
+            title: "Register"
+        });
+    }
+    users[`${newusername}`] = hashednewpassword;
+    fs.writeFileSync("users.txt", JSON.stringify(users));
 
+    res.redirect("/login");
+});
+app.get("/register", function(req, res, next){
+    res.render("register", {
+        error: false,
+        title: "Register"
+    });
+});
+//以下関数
 function generateToken() {//トークンを生成する関数
     return uuid.v4();
 }

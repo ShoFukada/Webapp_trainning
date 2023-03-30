@@ -7,7 +7,7 @@
     <body>
         <h2>ログイン</h2>
         <% if (error) { %>
-            <p>無効なユーザ名もしくはパスワードです</p>
+            <p>無効なユーザ名もしくはパスワードです。</p>
         <% } %>
         <form action="/login" method="post">
             <label>ユーザ名</label>
@@ -15,6 +15,9 @@
             <label>パスワード</label>
             <input type="password" name="password" required><br>
             <input type="submit" value="ログイン"><!--type=submitは要素が送信ボタンであることを指定する、またvalueはボタンに表示される内容を指定-->
+        </form>
+        <form action="/register" method="get">
+            <input type="submit" value="ユーザ登録画面へ">
         </form>
     </body>
 </html> 
