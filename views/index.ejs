@@ -9,7 +9,7 @@
     <h2>シフト入力</h2>
     <form action="/" method="post">
         <label>名前</label>
-        <input type="text" name="username" required pattern="[a-z]+"></label><br>
+        <input type="text" name="username" value="<%= username %>"></label><br>
         <label>日時</label>
         <input type="date" name="date" required><br>
         <label>出社時刻</label>
@@ -27,11 +27,19 @@
     <ul style="list-style: none;">
         <% for(let i = 0; i < shifts.length; i++) { %> 
             <li>
+                <%= shifts[i].username %>
                 <%= shifts[i].date %>
                 <%= shifts[i].start_time %>
                 <%= shifts[i].end_time %>
-                <%= usernames[i] %>
                 <%= shifts[i].comment %>
+                <form action="/revision_shift" method="post">
+                    <input type="hidden" name="id" value="<%= shifts[i].id %>">
+                    <input type="submit" value="修正">
+                </form>
+                <form action="/delete_shift" method="post">
+                    <input type="hidden" name="id" value="<%= shifts[i].id %>">
+                    <input type="submit" value="削除">
+                </form>
             </li>
         <% } %>
     </ul>

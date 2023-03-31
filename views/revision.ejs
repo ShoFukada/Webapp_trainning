@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title><%= title %></title>
+</head>
+<body>
+    <h1>シフト修正</h1>
+    <form action="/update_shift" method="post">
+        <input type="hidden" name="id" value="<%= shift.id %>">
+        <label>名前</label>
+        <input type="text" name="username" value="<%= shift.username %>"></label><br>
+        <label>日時</label>
+        <input type="date" name="date" value="<%= shift.date %>" required><br>
+        <label>出社時刻</label>
+        <input type="time" name="start_time" value="<%= shift.start_time %>" required><br>
+        <label>退社時刻</label>
+        <input type="time" name="end_time" value="<%= shift.end_time %>" required><br>
+        <label>コメント</label>
+        <textarea name="comment"><%= shift.comment %></textarea><br>
+        <input type="submit" value="シフトを更新">
+    </form>
+</body>
+</html>
