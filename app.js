@@ -128,7 +128,6 @@ app.post("/revision_shift", function(req, res, next){
         } else {
             shift = result[0];
             shift.date = formatDate(shift.date);
-            console.log(shift);
             res.render("revision", {
                 title: "Shift_revision",
                 shift: {

@@ -32,14 +32,16 @@
                 <%= shifts[i].start_time %>
                 <%= shifts[i].end_time %>
                 <%= shifts[i].comment %>
-                <form action="/revision_shift" method="post">
-                    <input type="hidden" name="id" value="<%= shifts[i].id %>">
-                    <input type="submit" value="修正">
-                </form>
-                <form action="/delete_shift" method="post">
-                    <input type="hidden" name="id" value="<%= shifts[i].id %>">
-                    <input type="submit" value="削除">
-                </form>
+                <% if(shifts[i].username == username) { %>
+                    <form action="/revision_shift" method="post">
+                        <input type="hidden" name="id" value="<%= shifts[i].id %>">
+                        <input type="submit" value="修正">
+                    </form>
+                    <form action="/delete_shift" method="post">
+                        <input type="hidden" name="id" value="<%= shifts[i].id %>">
+                        <input type="submit" value="削除">
+                    </form>
+                <% } %>
             </li>
         <% } %>
     </ul>
