@@ -5,14 +5,15 @@ const fs = require("fs");
 const uuid = require("uuid");
 const crypto = require("crypto");
 const mysql = require("mysql");
-
+const path = require("path");
 //mysqlとの接続
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     port: '3306',
     user: 'webapp',
     password: 'F13579@s24680',
-    database: 'shiftapp'
+    database: 'shiftapp',
+    charset: "utf8mb4"
   });
 connection.connect((err) => {
     if (err) {
@@ -28,6 +29,8 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));//bodyを使うために必要な二文
 app.use(cookieParser());
+app.set('views', path.join(__dirname, 'views'));
+
 
 /* 2. listen()メソッドを実行して3000番ポートで待ち受け。*/
 const server = app.listen(3000, function(){
