@@ -2,3 +2,4 @@ node_modules/
 *.txt
 ssl/
 *.csr
+*.DS_Store
