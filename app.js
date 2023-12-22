@@ -6,22 +6,23 @@ const uuid = require("uuid");
 const crypto = require("crypto");
 const mysql = require("mysql");
 const path = require("path");
+require('dotenv').config();
 //mysqlとの接続
 const connection = mysql.createConnection({
-    host: '127.0.0.1',
-    port: '3306',
-    user: 'webapp',
-    password: 'F13579@s24680',
-    database: 'shiftapp',
+    host: process.env.DB_HOST,
+    port: process.env.MYSQL_PORT,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
     charset: "utf8mb4"
   });
-connection.connect((err) => {
+  connection.connect((err) => {
     if (err) {
-        console.log('error connecting: ' + err.stack);
-        return
+        console.error('Error connecting to MySQL:', err); // エラー詳細をコンソールに出力
+        throw err; // エラーをスローしてアプリケーションを停止するか、適切な処理を行います
     }
-    console.log('success');
-    });
+    console.log('Connected to MySQL database');
+});
 
 const app = express();
 
@@ -35,6 +36,11 @@ app.set('views', path.join(__dirname, 'views'));
 /* 2. listen()メソッドを実行して3000番ポートで待ち受け。*/
 const server = app.listen(3000, function(){
     console.log("Node.js is listening to PORT:" + server.address().port);
+    console.log(process.env.DB_HOST)
+    console.log(process.env.MYSQL_PORT)
+    console.log(process.env.MYSQL_USER)
+    console.log(process.env.MYSQL_PASSWORD)
+    console.log(process.env.MYSQL_DATABASE)
 });
 
 let allshifts = [];
